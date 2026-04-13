@@ -1,5 +1,5 @@
 # Big O
-How time scales with respect to some input variables
+How time scales with respect to some input variable
 
 1. Different steps get added
     function something() {
