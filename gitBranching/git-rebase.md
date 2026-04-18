@@ -1,5 +1,4 @@
 # Git Rebase
-
 The second form to combine different works between branchs is using rebase. Him gets a group of commits, "copy" them, and put them in other place.
 
 <ul>
