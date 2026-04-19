@@ -1,0 +1,10 @@
+:wqa  27 claude
+  36 ls
+  43 find
+  46 docker
+  68 curl
+  95 nvim
+ 108 git
+ 116 clear
+ 122 cd
+ 140 python
