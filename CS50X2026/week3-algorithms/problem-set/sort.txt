@@ -1,0 +1,12 @@
+sort1 uses: Bubble Sort
+
+How do you know?: Because in random numbers he is the slowest, but when we use the omega case, the best case, when the data is already sorted, he can go much faster than the sort 3 for instance.
+
+sort2 uses: Merge Sort
+
+How do you know?: It's the fastest algorithm between the 3. Don't matter the size of the data, still the fastest.
+
+sort3 uses: Selection Sort
+
+How do you know?: He isn't the slowest, but it's not the fastest. And has the same time when the data is sorted, the time complexity doesn't change when the data is sorted(omega).
+
