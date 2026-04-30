@@ -81,7 +81,6 @@ The error is the function with FD 2
 2. exec() — the child replaces itself with the requested program.                                                                                                                                                                      
 3. The child runs, possibly modifying its own state (cwd, env vars, etc.).                                                                                                                                                             
 4. The child exits. Its state dies with it; the parent is untouched.                                                                                                                                                                   
-                                                                               
 If cd were a standalone binary, it would call chdir() inside the child process, then exit. The shell (parent) would stay in the original directory — nothing would change from the user's perspective.                                 
 That's why cd is a builtin: a command the shell executes in its own process, without fork/exec. The shell itself calls chdir(), so its cwd actually changes. The same reason applies to export, source, exit, alias, etc.   
 
@@ -102,8 +101,6 @@ scriptLecture.sh
 
 ## 12 - Use pipes to find the 5 most common file extensions in your home directory. (Hint: combine find, grep or sed or awk, sort, uniq -c, and head.)
 find ~ -type f -name '*.*' | sed -E 's/.*\.//' | sort | uniq -c | sort -rn | head -n 5                                                                                                                                                   
-
-
 ## 13 - xargs converts lines from stdin into command arguments. Use find and xargs together (not find -exec) to find all .sh files in a directory and count the lines in each with wc -l. Bonus: make it handle filenames with spaces. (Hint: -print0 and -0). See man xargs.
 find ~/dev/BasicStudies -type f -name "*.sh" -print0 | xargs -0 wc -l
 
