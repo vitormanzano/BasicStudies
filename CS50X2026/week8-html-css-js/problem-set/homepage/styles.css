@@ -1,0 +1,105 @@
+body {
+    text-align: center;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    font-size: 72px;
+    padding: 70px;
+    background-color: #ffd23f;
+}
+
+main {
+    background-color: #000000;
+    padding: 30px;
+    color: #ffd23f;
+    flex: 1;
+}
+
+.problems {
+    display: flex;
+    flex-wrap: wrap;                
+    align-items: center;
+    justify-content: center;
+    margin: 80px;
+
+}
+
+.problems > a {
+    margin: 40px;
+    cursor: pointer;
+}
+
+.card-img-top {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.code-card {
+    width: 100%;
+    max-width: 900px;
+    margin: 40px auto;
+    text-align: left;
+}
+
+.code-card .card-header {
+    background-color: #ffd23f;
+    font-weight: bold;
+}
+
+.code-card pre {
+    max-height: 450px;   
+    overflow: auto;      
+    margin: 0;
+    padding: 20px;
+    background-color: #1e1e1e;
+}
+
+.code-card code {
+    font-family: "Courier New", Consolas, Monaco, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #f8f8f2;
+}
+
+footer {
+    padding: 20px;
+    background-color: #00bcf0;
+    color: #ffd23f;
+}
+
+#play-invincible {
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    header {
+        font-size: 32px;
+        padding: 20px;
+    }
+
+    main {
+        padding: 15px;
+    }
+
+    .problems {
+        margin: 20px;
+    }
+
+    .problems > a {
+        margin: 15px;
+    }
+
+    .code-card {
+        margin: 20px auto;
+    }
+
+    .code-card code {
+        font-size: 12px;        
+    }
+}
+

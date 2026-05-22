@@ -1,3 +1,28 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        <link href="styles.css" rel="stylesheet">
+        <title>My Webpage - Fiftyville</title>
+    </head>
+    <body>
+        <header>
+            Welcome to the fiftyville problem!
+        </header>
+
+        <main>
+            <h2>  This is the fiftyville problem </h2>
+            <p> Here is the problem: <a href="https://cs50.harvard.edu/x/psets/7/fiftyville/"> fiftyville </a>
+            <p> Here is my solution! </p>
+            <div class="card code-card">
+                <div class="card-header">
+                   fiftyville.sql 
+                </div>
+                <div class="card-body p-0">
+                    <pre><code>
 -- Keep a log of any SQL queries you execute as you solve the mystery.
 
 -- Facts: Happened in 07/28/2025 | Humphrey street
@@ -30,7 +55,7 @@ AND month = 07
 AND day = 28
 AND activity = 'exit'
 and hour = 10
-and minute > 15 AND minute < 25;
+and minute &gt; 15 AND minute &lt; 25;
 
 -- +-----+------+-------+-----+------+--------+----------+---------------+
 -- | id  | year | month | day | hour | minute | activity | license_plate |
@@ -124,7 +149,7 @@ AND license_plate IN ('5P2BI95', '94KL13X', '6P58WS2', '4328GD8', '322W7JE', '0N
 
 -- Who calls someone
 SELECT * FROM phone_calls
-WHERE duration < 60
+WHERE duration &lt; 60
 AND caller IN ('(770) 555-1861','(829) 555-5269', '(389) 555-5198', '(367) 555-5533')
 AND year = 2025
 AND month = 07
@@ -192,9 +217,22 @@ WHERE phone_number IN (
     AND year = 2025
     AND month = 07
     AND day = 28
-    AND duration < 60
+    AND duration &lt; 60
 );
 
 -- | 864400 | Robin | (375) 555-8161 | NULL            | 4V16VO0       |
 -- That's the guy! He is a really thief he even have a passport_number
+</code></pre>
+                </div>
+            </div>
+            <a href=index.html> <h2> Main Page </h2> </a>
+        </main>
 
+        <footer>
+            <p> Hey! Pay attention in the problems! </p>
+            <p> I know the colors aren't beautiful, but they are <b id="play-invincible">invincible</b> </p>
+        </footer>
+
+        <script src="script.js"></script>
+    </body>
+</html>

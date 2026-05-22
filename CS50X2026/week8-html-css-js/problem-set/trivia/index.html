@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                let correct = document.querySelector('.correct');
+                correct.addEventListener('click', function() {
+                    correct.style.background = '#00ff00';
+                    document.querySelector('#feedback1').innerHTML = 'Correct!';
+                });
+
+                let incorrects = document.querySelectorAll('.incorrect');
+
+                for (let i = 0; i < incorrects.length; i++) {
+                    incorrects[i].addEventListener('click', function() {
+                        incorrects[i].style.background = '#ff0000';
+                        document.querySelector('#feedback1').innerHTML = 'Incorrect!';
+                  })
+                };
+
+
+                document.querySelector('#check').addEventListener('click', function() {
+                    let input = document.querySelector('input');
+                    if (input.value.toLowerCase() === 'visual studio code' || input.value.toLowerCase() === 'vscode') {
+                        input.style.background = '#00ff00';
+                        document.querySelector('#feedback2').innerHTML = 'Correct!';
+                    }
+                    else {
+                        input.style.background = '#ff0000';
+                        document.querySelector('#feedback2').innerHTML = 'Incorrect!';
+                    }
+                })
+            });
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+
+                <h3>How many people have ever lived on earth?</h3>
+
+                <button type="submit" class="incorrect">37 billions</button>
+                <button type="submit" class="incorrect">231 billions</button>
+                <button type="submit" class="incorrect">93 billions</button>
+                <button type="submit" class="correct">117 billions</button>
+                <button type="submit" class="incorrect">149 billions</button>
+
+                <p id="feedback1"> </p>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>Which IDE is the most popular over world?</h3>
+                <input type="text">
+                <button id="check"> check! </button>
+                <p id="feedback2"> </p>
+            </div>
+        </div>
+    </body>
+</html>
+

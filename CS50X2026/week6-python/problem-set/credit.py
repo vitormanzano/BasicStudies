@@ -2,8 +2,6 @@ import re
 from cs50 import get_string
 
 def calculate_sum(number):
-    sum = 0
-
     round = 0
     otherDigits = 0
     digitsMultiplied = 0
@@ -60,6 +58,3 @@ if sum % 10 == 0:
     print_type_card(number)
 else:
     print("INVALID")
-
-    
-   	

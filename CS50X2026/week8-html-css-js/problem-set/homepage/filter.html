@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        <link href="styles.css" rel="stylesheet">
+        <title>My Webpage - Filter</title>
+    </head>
+    <body>
+        <header>
+            Welcome to the filter problem!
+        </header>
+
+        <main>
+            <h2>  This is the filter problem </h2>
+            <p> Here is the problem: <a href="https://cs50.harvard.edu/x/psets/4/filter/more/"> filter </a>
+            <p> Here is my solution! </p>
+            <div class="card code-card">
+                <div class="card-header">
+                   filter.c
+                </div>
+                <div class="card-body p-0">
+                    <pre><code>
+#include "helpers.h"
+#include &lt;math.h&gt;
+#include &lt;stdlib.h&gt;
+
+// Convert image to grayscale
+void grayscale(int height, int width, RGBTRIPLE image[height][width])
+{
+    for (int i = 0; i &lt; height; i++)
+    {
+        for (int j = 0; j &lt; width; j++)
+        {
+            int average =
+                round((image[i][j].rgbtBlue + image[i][j].rgbtGreen + image[i][j].rgbtRed) / 3.0);
+            image[i][j].rgbtBlue = average;
+            image[i][j].rgbtGreen = average;
+            image[i][j].rgbtRed = average;
+        }
+    }
+}
+
+// Reflect image horizontally
+void reflect(int height, int width, RGBTRIPLE image[height][width])
+{
+    for (int i = 0; i &lt; height; i++)
+    {
+        for (int j = 0; j &lt; width / 2; j++)
+        {
+            RGBTRIPLE tmp = image[i][j];
+            image[i][j] = image[i][width - j - 1];
+            image[i][width - j - 1] = tmp;
+        }
+    }
+}
+
+// Blur image
+void blur(int height, int width, RGBTRIPLE image[height][width])
+{
+    int counter = 0;
+    float red = 0.0;
+    float green = 0.0;
+    float blue = 0.0;
+    RGBTRIPLE new_image[height][width];
+
+    for (int i = 0; i &lt; height; i++)
+    {
+        for (int j = 0; j &lt; width; j++)
+        {
+            counter = 0;
+            red = green = blue = 0.0;
+
+            for (int r = i - 1; r &lt;= i + 1; r++)
+            {
+                if (r &lt; 0 || r &gt;= height)
+                {
+                    continue;
+                }
+                for (int c = j - 1; c &lt;= j + 1; c++)
+                {
+                    if (c &lt; 0 || c &gt;= width)
+                    {
+                        continue;
+                    }
+                    red += image[r][c].rgbtRed;
+                    green += image[r][c].rgbtGreen;
+                    blue += image[r][c].rgbtBlue;
+                    counter++;
+                }
+            }
+            new_image[i][j].rgbtRed = (int) round(red / counter);
+            new_image[i][j].rgbtGreen = (int) round(green / counter);
+            new_image[i][j].rgbtBlue = (int) round(blue / counter);
+        }
+    }
+    for (int i = 0; i &lt; height; i++)
+    {
+        for (int j = 0; j &lt; width; j++)
+        {
+            image[i][j] = new_image[i][j];
+        }
+    }
+    return;
+}
+
+// Detect edges
+void edges(int height, int width, RGBTRIPLE image[height][width])
+{
+    RGBTRIPLE buffer[height][width];
+    int gx[3][3] = {{-1, 0, 1}, {-2, 0, 2}, {-1, 0, 1}};
+
+    int gy[3][3] = {{-1, -2, -1}, {0, 0, 0}, {1, 2, 1}};
+    float redx = 0, redy = 0;
+    float bluex = 0, bluey = 0;
+    float greenx = 0, greeny = 0;
+
+    for (int i = 0; i &lt; height; i++)
+    {
+        for (int j = 0; j &lt; width; j++)
+        {
+            redx = redy = 0;
+            greenx = greeny = 0;
+            bluex = bluey = 0;
+
+            for (int r = i - 1; r &lt;= i + 1; r++)
+            {
+                if (r &lt; 0 || r &gt;= height)
+                {
+                    continue;
+                }
+                for (int c = j - 1; c &lt;= j + 1; c++)
+                {
+                    if (c &lt; 0 || c &gt;= width)
+                    {
+                        continue;
+                    }
+
+                    redx += image[r][c].rgbtRed * gx[r - i + 1][c - j + 1];
+                    redy += image[r][c].rgbtRed * gy[r - i + 1][c - j + 1];
+                    greenx += image[r][c].rgbtGreen * gx[r - i + 1][c - j + 1];
+                    greeny += image[r][c].rgbtGreen * gy[r - i + 1][c - j + 1];
+                    bluex += image[r][c].rgbtBlue * gx[r - i + 1][c - j + 1];
+                    bluey += image[r][c].rgbtBlue * gy[r - i + 1][c - j + 1];
+                }
+            }
+            int red = (int) round(sqrt(redx * redx + redy * redy));
+            int green = (int) round(sqrt(greenx * greenx + greeny * greeny));
+            int blue = (int) round(sqrt(bluex * bluex + bluey * bluey));
+            if (red &gt; 255)
+            {
+                red = 255;
+            }
+            if (green &gt; 255)
+            {
+                green = 255;
+            }
+            if (blue &gt; 255)
+            {
+                blue = 255;
+            }
+            buffer[i][j].rgbtRed = red;
+            buffer[i][j].rgbtGreen = green;
+            buffer[i][j].rgbtBlue = blue;
+        }
+    }
+    for (int i = 0; i &lt; height; i++)
+    {
+        for (int j = 0; j &lt; width; j++)
+        {
+            image[i][j] = buffer[i][j];
+        }
+    }
+    return;
+}
+</code></pre>
+                </div>
+            </div>
+            <a href=index.html> <h2> Main Page </h2> </a>
+        </main>
+
+        <footer>
+            <p> Hey! Pay attention in the problems! </p>
+            <p> I know the colors aren't beautiful, but they are <b id="play-invincible">invincible</b> </p>
+        </footer>
+
+        <script src="script.js"></script>
+    </body>
+</html>
