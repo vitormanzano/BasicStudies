@@ -16,6 +16,7 @@ export class SafeLinkDirective {
   constructor() {
     console.log('SafeLinkDirective');
   }
+
   onConfirmLeavePage(event: MouseEvent) {
     const wantsToLeave = window.confirm('Do you want to leave the app?');
 
